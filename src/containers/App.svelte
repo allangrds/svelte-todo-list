@@ -1,16 +1,17 @@
 <script>
     import Todo from '../components/Todo.svelte'
     import List from '../components/List.svelte'
+    import { tasks } from '../store'
 
-    let tasks = []
+    let tasksList
 
-    function addTask (task) {
-        tasks = [
-            ...tasks,
-            task,
-        ]
-        console.log(`tasks -`, tasks)
-    }
+    tasks.subscribe(value => {
+		tasksList = value
+    })
+    
+    function addTask(task) {
+		tasks.update(() => [...tasksList, task])
+	}
 </script>
 
 <style>
@@ -25,6 +26,6 @@
         onSave={addTask}
     />
     <List
-        list={tasks}
+        list={tasksList}
     />
 </main>
