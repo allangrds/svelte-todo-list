@@ -1,14 +1,9 @@
 <script>
-    import List from './List.svelte'
-
+    export let onSave
     let task = ''
-    let tasks = []
 
     function addTask () {
-        tasks = [
-            ...tasks,
-            task,
-        ]
+        onSave(task)
         task = ''
     }
 </script>
@@ -21,8 +16,4 @@
     <button type="button" on:click={addTask}>
         Criar
     </button>
-
-    <List
-        list={tasks}
-    />
 </form>
